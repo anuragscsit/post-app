@@ -11,8 +11,11 @@
 				    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
 				    <p class="card-text"><%= post.description %></p>
 				    <%= link_to 'Show', post %>
-				    <%= link_to 'Edit', edit_post_path(post)%>
-				    <%= link_to 'Delete', post, method: :delete, data: {confirm: 'Aru you sure?'}%>
+					    
+				    <% if user_signed_in? && post.user_id == current_user.id%>
+					    <%= link_to 'Edit', edit_post_path(post)%>
+					    <%= link_to 'Delete', post, method: :delete, data: {confirm: 'Aru you sure?'}%>
+					<% end %>
 				  </div>
 				</div>
 			</div>	

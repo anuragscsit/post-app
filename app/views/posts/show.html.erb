@@ -9,7 +9,9 @@
 			<p><%= @user.email %></p>
 		</div>
 		<div>
-			<%= link_to 'Edit', edit_post_path(@post) %> 
+			<% if user_signed_in? && current_user.id == @post.user_id %>
+				<%= link_to 'Edit', edit_post_path(@post) %> 
+			<% end %>
 		</div>
 		<div>
 			<%= link_to 'back', posts_path %>
