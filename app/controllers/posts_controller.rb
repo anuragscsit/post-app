@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 	before_action :set_post, only: %i[show edit update destroy like]
 	  before_action :authenticate_user!, except: [:index, :show]
 	def index
-		@post = Post.all.order("created_at DESC")
+		@post = Post.all.order("created_at DESC").page params[:page]
 	end
 
 	def new
@@ -49,6 +49,10 @@ class PostsController < ApplicationController
 	def like
 
 		LikePost.create(user_id: current_user.id, post_id: @post.id)
+		@users = User.all
+		# @users.each do|user|
+			UserMailer.example(User.new(email: current_user.email)).deliver
+		# end
 		redirect_to post_path(@post)
 	end
 

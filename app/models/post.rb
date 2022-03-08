@@ -9,4 +9,6 @@ class Post < ApplicationRecord
 		!!self.like_posts.find{|like| like.user_id == user.id}
 		
 	end
+
+	paginates_per 10
 end
